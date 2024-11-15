@@ -181,7 +181,7 @@ func (m model) View() string {
 }
 
 func main() {
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.NewSource(time.Now().UTC().UnixNano())
 
 	if _, err := tea.NewProgram(newModel(), tea.WithAltScreen()).Run(); err != nil {
 		fmt.Println("Error running program:", err)
