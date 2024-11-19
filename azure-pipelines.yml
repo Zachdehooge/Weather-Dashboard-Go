@@ -32,5 +32,6 @@ steps:
         dep ensure
     fi
     go build -v .
+    ./Weather-Dashboard
   workingDirectory: '$(system.defaultWorkingDirectory)'
   displayName: 'Get dependencies, then build'
