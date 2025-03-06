@@ -36,6 +36,8 @@ func main() {
 	// Print the styled text+
 	fmt.Println(styledText)
 
+	// TODO: Add Weather Trends Analyzer and Convective Outlook Options
+
 	fmt.Scanln(&initial)
 
 	if initial == "1" {
