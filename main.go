@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/charmbracelet/lipgloss"
-	"weather-dashboard/cmd"
+	"github.com/zachdehooge/Weather-Dashboard/cmd"
 )
 
 func main() {
