@@ -54,34 +54,33 @@ var forecastData struct {
 	} `json:"properties"`
 }
 
-func AllAlerts() {
+func AllAlerts() string {
 	resp, err := http.Get("https://api.weather.gov/alerts/active?status=actual&message_type=alert&&urgency=Immediate,Expected,Future&region_type=land&severity=Extreme,Severe,Moderate&limit=500")
 	if err != nil {
 		fmt.Println("Error:", err)
-		return
+		return ""
 	}
 	defer resp.Body.Close()
 
 	var data AlertsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		fmt.Println("Error:", err)
-		return
+		return ""
 	}
 
 	currentTime := time.Now()
-	formattedTime := currentTime.Format("01-02-2006 | 15:04:05")
-
 	currentTime2 := time.Now()
-	formattedTime2 := currentTime2.Format("01-02-2006_15:04:05")
-
 	currentUTC := currentTime.UTC()
-	formattedTimeUTC := currentUTC.Format("15:04:05")
+
+	formattedTime := currentTime.Format("01-02-2006 | 15-04")
+	formattedTime2 := currentTime2.Format("01-02-2006_15-04")
+	formattedTimeUTC := currentUTC.Format("15-04")
 
 	// Open a file to write the output
 	file, err := os.Create(fmt.Sprintf("All_Alerts_%s.txt", formattedTime2))
 	if err != nil {
 		fmt.Println("Error creating file:", err)
-		return
+		return ""
 	}
 	defer file.Close()
 
@@ -128,6 +127,7 @@ func AllAlerts() {
 		//fmt.Println(readableExpiresTime)
 
 	}
+	return ""
 }
 
 func StateAlerts() {
