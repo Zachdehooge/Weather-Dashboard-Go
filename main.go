@@ -1,9 +1,53 @@
 package main
 
 import (
-	weather "github.com/zachdehooge/Weather-Dashboard/cmd"
+	"fmt"
+	"github.com/charmbracelet/lipgloss"
+	"weather-dashboard/cmd"
 )
 
 func main() {
-	weather.PullWeather()
+
+	var initial string
+
+	titleStyle := lipgloss.NewStyle().
+		Foreground(lipgloss.Color("#FFFFFF")).
+		Background(lipgloss.Color("#7D56F4")).
+		Padding(1, 2).
+		Margin(1, 0).
+		Bold(true)
+
+	title := titleStyle.Render("Weather Dashboard")
+
+	fmt.Println(title)
+
+	initialText := "\n(1)All Alerts\n(2)State Alerts\n(3)day-forecast\n(4)exit\n\nChoose An Option: "
+
+	// Create a Lipgloss style with a border
+	borderStyle := lipgloss.NewStyle().
+		Border(lipgloss.NormalBorder()).
+		Padding(1, 2).
+		Margin(0).
+		BorderForeground(lipgloss.Color("#FF69B4")) // Optional: Color the border
+
+	// Apply the style to the text
+	styledText := borderStyle.Render(initialText)
+
+	// Print the styled text+
+	fmt.Println(styledText)
+
+	fmt.Scanln(&initial)
+
+	if initial == "1" {
+		cmd.AllAlerts()
+		main()
+	} else if initial == "2" {
+		cmd.StateAlerts()
+		main()
+	} else if initial == "3" {
+		cmd.Forecast()
+		main()
+	} else {
+		fmt.Println("\nExiting Application")
+	}
 }
